@@ -1,3 +1,85 @@
 {% extends 'first_project/base.html' %}
-{% block main_area %}
+{% block left_nav %}
+<div class="d-md-none d-lg-block col-3">
+    <div class="position-sticky" style="top: 2rem;">
+        <div class="card my-4">
+            <h5 class="card-header">글 목록</h5>
+            {% for p in post_list %}
+            <div class="p-5">
+                <a href="#{{p.pk}}">{{p.title}}</a>
+            </div>
+            {{p.categories}}
+            {% endfor %}
+        </div>
+        <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            {% for i in categories %}
+            <div class="p-5">
+               <a href="{{i.get_url}}">
+                   {{i}}({{i.post_set.count}})
+               </a> 
+            </div>
+            {% endfor %}
+            <div class="p-5">
+                <a href="/blog/category/no_category/">
+                    미분류({{no_category_count}})
+                </a> 
+            </div>
+        </div>
+        <!-- {{categories}} -->
+    
+    </div>
+</div>
+
+{% endblock %}
+
+{% block contend %}
+<div class="col-md">
+
+    {% for p in post_list %}
+    <div class="p-5">
+        <h2 class="blog-post-title" id="{{p.pk}}">
+            <a onclick="fetch('{{p.get_url}}').then(
+                   (response) => 
+                   response.text().then((text) => document.querySelector('#pk_{{p.pk}}').innerHTML = text
+                   )
+                )">
+
+                {{p.title}}
+            </a>
+        </h2>
+        <!-- {{p.title}} -->
+        {% if p.img %}
+        <img class="card-img-top" src="{{p.img.url}}">
+        {% else %}
+        <img class="card-img-top" src="https://picsum.photos/id/{{p.pk}}/800/400">
+
+        {% endif %}
+        <span class="detail" id="pk_{{p.pk}}"></span>
+
+    </div>
+    {% endfor %}
+    <nav class="pager text-center">
+
+
+        {% if page_obj.has_previous %}
+        <a class="btn btn-outline-primary" href="?page=1">first</a>
+        <a class="btn btn-outline-primary" href="?page={{page_obj.previous_page_number}}">
+            < </a>
+                {% else %}
+                <a class="btn btn-outline-secondary">first</a>
+                <a class="btn btn-outline-secondary"> < </a>
+
+                        {%endif%}<span>{{page_obj}}</span>
+                        {% if page_obj.has_next %}
+                        <a class="btn btn-outline-primary" href="?page={{page_obj.next_page_number}}">></a>
+                        <a class="btn btn-outline-primary" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+                        {% else %}
+                        <a class="btn btn-outline-secondary">></a>
+                        <a class="btn btn-outline-secondary">Last</a>
+
+                        {% endif %}
+    </nav>
+</div>
+
 {% endblock %}
