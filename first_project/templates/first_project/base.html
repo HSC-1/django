@@ -9,7 +9,18 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/blog/"> -->
-    
+    <script>
+      function fetchPage(neme){
+        fetch(neme).then(
+                   (response) => 
+                   response.text().then((text) => document.querySelector('#pk_'+response.url.split('/').slice(-2)[0].toString()).innerHTML = text
+                   )
+                )
+      }
+      if(location.hash){
+        fetchPage('/blog/'+location.hash.substr(7));
+      } 
+    </script>
     <title>Blog page</title>
 </head>
 <body >

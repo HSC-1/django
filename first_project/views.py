@@ -1,9 +1,10 @@
 # from django.shortcuts import render
+from django.core.exceptions import PermissionDenied
 from django.db.models import fields
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Category, Post
 from django.views.generic import ListView, DetailView, CreateView
-
+from .form import CommentForm
 from first_project import models
 # from django.views.generic import ListView
 # from .models import Post
@@ -27,6 +28,12 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
+    def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_count'] = Post.objects.filter(category=None).count()
+        context['comment_form'] = CommentForm
+        return context
 
 
 def category_page(request, slug):
@@ -47,6 +54,18 @@ def category_page(request, slug):
             'category':category,
         }
     )
+def new_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method =='POST':
+        comment_form = CommentForm(request.POST) 
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect(post.get_comment_url())
+    else:
+        return redirect(post.get_absolute_url())
+
 # def index(request):
 #     posts = Post.objects.al l().order_by('pk')
 #     return render(

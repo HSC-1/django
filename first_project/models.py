@@ -35,7 +35,22 @@ class Post(models.Model):
         return f'/blog/{self.pk}/' 
 
 
+    def get_comment_url(self):
+        return f'/blog/#!{self.pk}'
+
     def get_absolute_url(self):
         return f'/blog/{self.pk}/' 
 
-    
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f'{self.content}'
+
+    def get_absolute_url(self):
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}'

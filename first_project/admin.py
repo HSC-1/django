@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category
+from .models import Comment, Post, Category
 # Register your models here.
 
 
@@ -9,3 +9,4 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_filed={'slug': ('name', )}
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Comment)

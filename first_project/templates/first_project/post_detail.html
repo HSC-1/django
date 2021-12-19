@@ -10,6 +10,22 @@
   {{post.get_context_data}}
   <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusamus eligendi voluptatem, deleniti id voluptas repellat sapiente dolorem. Voluptas eius similique exercitationem est aliquid iusto debitis et totam expedita porro.</p>
 </div>
+<form method="post" id="comment-form" action="{{post.get_absolute_url}}new_comment/">{%csrf_token%}
+  <div class="form-group">
+    
+  {{comment_form}}
+  </div>
+  <button type="submit" class="btn btn-primary">Submmit</button>
+</form> 
+{% if post.comment_set.exists %}
+{%for comment in post.comment_set.iterator %}
+<div class="card mb-4" id="comment-{{comment.pk}}">
+  <h5>{{comment.content}}</h5>
+</div>
+{%endfor%}
+{%endif%}
+
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test_{{post.pk}}">Login</button>
 <div class="modal fade" id="test_{{post.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
