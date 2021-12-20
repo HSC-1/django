@@ -1,15 +1,22 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/blog/"> -->
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/css/bootstrap.min.css'%}" media="screen">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/css/forcarousel.css'%}">
     <script>
+      $('.carousel').carousel()
+
       function fetchPage(neme){
         fetch(neme).then(
                    (response) => 
@@ -24,7 +31,7 @@
     <title>Blog page</title>
 </head>
 <body >
-    
+
   <div class="container">
     <header class="blog-header py-3">
       <div class="row flex-nowrap justify-content-between align-items-center">
@@ -48,22 +55,80 @@
         {% for p in post_list %}
         <a class="p-2 link-secondary" href="{{ p.get_url}}">{{ p.title }}</a>
         {% endfor %}
-        <!-- <a class="p-2 link-secondary" href="#">U.S.</a>
-        <a class="p-2 link-secondary" href="#">Technology</a>
-        <a class="p-2 link-secondary" href="#">Design</a>
-        <a class="p-2 link-secondary" href="#">Culture</a>
-        <a class="p-2 link-secondary" href="#">Business</a>
-        <a class="p-2 link-secondary" href="#">Politics</a>
-        <a class="p-2 link-secondary" href="#">Opinion</a>
-        <a class="p-2 link-secondary" href="#">Science</a>
-        <a class="p-2 link-secondary" href="#">Health</a>
-        <a class="p-2 link-secondary" href="#">Style</a>
-        <a class="p-2 link-secondary" href="#">Travel</a> -->
       </nav>
     </div>
   </div>
-  
+
+
   <main class="container">
+    <div class="ca_carousel">
+      <div class="ca_carousel-inner">
+          <input class="ca_carousel-open" type="radio" id="ca_carousel-1" name="ca_carousel" aria-hidden="true" hidden="" checked="checked">
+          <div class="ca_carousel-item">
+            <img src="http://fakeimg.pl/2000x800/0079D8/fff/?text=Without">
+
+          </div>
+          <input class="ca_carousel-open" type="radio" id="ca_carousel-2" name="ca_carousel" aria-hidden="true" hidden="">
+          <div class="ca_carousel-item">
+              <img src="http://fakeimg.pl/2000x800/DA5930/fff/?text=JavaScript">
+          </div>
+          <input class="ca_carousel-open" type="radio" id="ca_carousel-3" name="ca_carousel" aria-hidden="true" hidden="">
+          <div class="ca_carousel-item">
+              <img src="http://fakeimg.pl/2000x800/F90/fff/?text=Carousel">
+          </div>
+          이것도 되나3
+          <label for="ca_carousel-3" class="ca_carousel-control prev control-1">‹</label>
+          <label for="ca_carousel-2" class="ca_carousel-control next control-1">›</label>
+          <label for="ca_carousel-1" class="ca_carousel-control prev control-2">‹</label>
+          <label for="ca_carousel-3" class="ca_carousel-control next control-2">›</label>
+          <label for="ca_carousel-2" class="ca_carousel-control prev control-3">‹</label>
+          <label for="ca_carousel-1" class="ca_carousel-control next control-3">›</label>
+          <ol class="ca_carousel-indicators">
+              <li>
+                  <label for="ca_carousel-1" class="ca_carousel-bullet">•</label>
+              </li>
+              <li>
+                  <label for="ca_carousel-2" class="ca_carousel-bullet">•</label>
+              </li>
+              <li>
+                  <label for="ca_carousel-3" class="ca_carousel-bullet">•</label>
+              </li>
+          </ol>
+      </div>
+  </div>
+    <!-- indicatior -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        {% for p in post_list %}
+        
+        <div class="carousel-item {%if forloop.first %} active {%endif%}">
+          {% if p.img %}
+          <img class="d-block w-100" alt="{{p.pk}}" src="{{p.img.url}}">
+          {% else %}
+          <img class="d-block w-100" alt="{{p.pk}}" src="https://picsum.photos/id/{{p.pk}}/800/400">
+          {% endif %}
+        </div>
+        {%endfor%}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- indi2 -->
+    
+    
+
+
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
       <div class="col-md-6 px-0">
         <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
@@ -71,7 +136,7 @@
         <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
       </div>
     </div>
-  
+
     <div class="row mb-2">
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">

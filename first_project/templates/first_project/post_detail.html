@@ -1,4 +1,4 @@
-
+{% load crispy_forms_tags %}
 <div class="col-md">
   <article class="blog-post">
     <!-- <h2 class="blog-post-title">{{ post.title}}</h2> -->
@@ -13,31 +13,37 @@
 <form method="post" id="comment-form" action="{{post.get_absolute_url}}new_comment/">{%csrf_token%}
   <div class="form-group">
     
-  {{comment_form}}
+  {{comment_form| crispy }}
   </div>
   <button type="submit" class="btn btn-primary">Submmit</button>
 </form> 
 {% if post.comment_set.exists %}
 {%for comment in post.comment_set.iterator %}
 <div class="card mb-4" id="comment-{{comment.pk}}">
+  <h5 class="mt-0">{{comment.author.username}}
+    <small class="text-muted">
+      {{comment.created_at}}
+    </small>
+
+  </h5>
   <h5>{{comment.content}}</h5>
 </div>
 {%endfor%}
 {%endif%}
 
-
+{% load socialaccount %}
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test_{{post.pk}}">Login</button>
 <div class="modal fade" id="test_{{post.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <a role="button" href="{% provider_login_url 'kakao' method='oauth2' %}">kakao login</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

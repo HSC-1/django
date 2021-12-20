@@ -17,7 +17,7 @@ class PostCreate(CreateView):
     fields = ['title','content', 'img', 'category']
 
 class PostList(ListView):
-    paginate_by = 2
+    paginate_by = 3
     model = Post
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

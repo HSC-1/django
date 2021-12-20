@@ -1,0 +1,102 @@
+.ca_carousel {
+    position: relative;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+    margin-top: 26px;
+}
+
+.ca_carousel-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.ca_carousel-open:checked + .ca_carousel-item {
+    position: static;
+    opacity: 100;
+}
+
+.ca_carousel-item {
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+}
+
+.ca_carousel-item img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.ca_carousel-control {
+    background: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    font-size: 40px;
+    height: 40px;
+    line-height: 35px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    cursor: pointer;
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    text-align: center;
+    width: 40px;
+    z-index: 10;
+}
+
+.ca_carousel-control.prev {
+    left: 2%;
+}
+
+.ca_carousel-control.next {
+    right: 2%;
+}
+
+.ca_carousel-control:hover {
+    background: rgba(0, 0, 0, 0);
+    color: #aaaaaa;
+}
+
+#ca_carousel-1:checked ~ .control-1,
+#ca_carousel-2:checked ~ .control-2,
+#ca_carousel-3:checked ~ .control-3 {
+    display: block;
+}
+
+.ca_carousel-indicators {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.ca_carousel-indicators li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.ca_carousel-bullet {
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 35px;
+}
+
+.ca_carousel-bullet:hover {
+    color: #aaaaaa;
+}
+
+#ca_carousel-1:checked ~ .control-1 ~ .ca_carousel-indicators li:nth-child(1) .ca_carousel-bullet,
+#ca_carousel-2:checked ~ .control-2 ~ .ca_carousel-indicators li:nth-child(2) .ca_carousel-bullet,
+#ca_carousel-3:checked ~ .control-3 ~ .ca_carousel-indicators li:nth-child(3) .ca_carousel-bullet {
+    color: #428bca;
+}

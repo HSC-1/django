@@ -26,9 +26,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now= True)
     img = models.ImageField(upload_to = 'blog/images/%Y/%m/%d/', blank = True)
+    author = models.ForeignKey(User,null=True ,on_delete=models.CASCADE)
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, blank= True)
     def __str__(self) -> str:
-        return f'[{self.pk}]{self.title}'
+        return f'[{self.pk}]{self.title} :: {self.author}'
 
 
     def get_url(self):
